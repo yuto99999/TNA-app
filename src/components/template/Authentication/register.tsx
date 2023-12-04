@@ -1,12 +1,16 @@
 import * as React from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Box, Typography , TextField, Button } from "@mui/material";
 
 export default function Register() {
   // useStateでユーザーが入力したメールアドレスとパスワードをemailとpasswordに格納する
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+
 
   // ユーザーが登録ボタンを押したときにdoRegister関数が実行される
   const doRegister = () => {
@@ -20,6 +24,7 @@ export default function Register() {
         // ユーザー登録ができたかどうかをわかりやすくするためのアラート
         alert("登録完了！");
         console.log(user);
+        navigate("/Home");
       })
       .catch((error) => {
         console.log(error);

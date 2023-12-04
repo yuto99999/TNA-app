@@ -21,11 +21,15 @@ export default function Login() {
         // ログインができたかどうかをわかりやすくするためのアラート
         alert("ログインOK!");
         console.log(user);
-        navigate("/home");
+        navigate("/Home");
       })
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const changeRegister = () => {
+    navigate("/Register");
   };
 
   return (
@@ -62,12 +66,21 @@ export default function Login() {
         />
       </Box>
       <Button
+        sx={{ marginRight: "1rem" }}
         variant="contained"
         onClick={() => {
           doLogin();
         }}
       >
         ログイン
+      </Button>
+      <Button
+        variant="contained"
+        onClick={() => {
+          changeRegister();
+        }}
+      >
+        新規登録
       </Button>
     </Box>
   );
