@@ -1,10 +1,11 @@
-import React from 'react';
-import './App.css';
-import Register from './components/template/Authentication/register';
-import Login from './components/template/Authentication/Login';
+import React from "react";
+import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from './components/template/Header';
-import Logout from './components/template/Authentication/Logout';
+import Register from "./components/organisms/Authentication/register";
+import Login from "./components/organisms/Authentication/Login";
+import Top from "./components/template/Top";
+import Profile from "./components/organisms/Profile";
+import { Test } from "./components/atmos/test";
 
 function App() {
   return (
@@ -12,15 +13,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/Register" element={<Register />} />
-        <Route
-          path="/Home"
-          element={
-            <>
-              <Header />
-              <Logout />
-            </>
-          }
-        />
+        <Route path="/Home" element={<Top />} />
+        <Route path="/Profile" element={<Profile />} />
+        <Route path="/Test" element={<Test />} />
       </Routes>
     </Router>
   );
