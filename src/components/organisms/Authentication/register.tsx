@@ -1,30 +1,23 @@
-import * as React from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Typography , TextField, Button } from "@mui/material";
+import { Box, Typography, TextField, Button } from "@mui/material";
 
 export default function Register() {
-  // useStateでユーザーが入力したメールアドレスとパスワードをemailとpasswordに格納する
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
-
-  // ユーザーが登録ボタンを押したときにdoRegister関数が実行される
   const doRegister = () => {
     const auth = getAuth();
 
-    // Firebaseで用意されているユーザー登録の関数
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // ユーザー登録すると自動的にログインされてuserCredential.userでユーザーの情報を取得できる
         const user = userCredential.user;
-        // ユーザー登録ができたかどうかをわかりやすくするためのアラート
         alert("登録完了！");
         console.log(user);
-        navigate("/Home");
+        navigate("/Profile");
       })
       .catch((error) => {
         console.log(error);
