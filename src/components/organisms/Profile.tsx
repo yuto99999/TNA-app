@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import {
   Paper,
   Typography,
@@ -9,15 +8,66 @@ import {
   Container,
   Avatar,
 } from "@mui/material";
+import { firebaseApp } from "../..";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { collection, addDoc, doc, updateDoc } from "firebase/firestore";
+import useUser from "../molecule/Hooks/useUser";
+import useProfile from "../molecule/Hooks/useProfile";
+import HomeBtn from "../molecule/Btn/HomeBtn";
 
 const Profile = () => {
   const [name, setName] = useState("");
   const [image, setImage] = useState<File | null>();
+  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-  const navigate = useNavigate();
+  const firestorage = firebaseApp.firestorage;
+  const firestore = firebaseApp.firestore;
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const { user } = useUser();
+
+  const profileData = useProfile();
+  const profile = profileData.profile;
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    try {
+      const uid = user!.uid;
+      const docRef = collection(firestore, "Users");
+
+      if (image) {
+        const imageRef = ref(firestorage, image.name);
+        uploadBytes(imageRef, image).then(() => {
+          getDownloadURL(imageRef).then(async (url) => {
+            if (profile) {
+              const userRef = doc(firestore, "Users", profile?.id);
+              await updateDoc(userRef, {
+                name,
+                image: url,
+              });
+            } else {
+              await addDoc(docRef, {
+                name,
+                image: url,
+                uid,
+              });
+            }
+          });
+        });
+      } else {
+        if (profile) {
+          const userRef = doc(firestore, "Users", profile?.id);
+          await updateDoc(userRef, { name });
+        } else {
+          await addDoc(docRef, { name, image: "", uid });
+        }
+      }
+      setSuccess(true);
+      alert("完了");
+    } catch (err) {
+      console.log(err);
+      setError(true);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,17 +76,22 @@ const Profile = () => {
     }
   };
 
-  const doBackHome = () => {
-    navigate("/Home");
-  };
-
   return (
     <Container maxWidth="sm">
       <Paper sx={{ m: 4, p: 4 }}>
         <Typography align="center">プロフィール編集</Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 4 }}>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-            <Avatar src={image ? URL.createObjectURL(image) : ""} alt="" />
+            <Avatar
+              src={
+                image
+                  ? URL.createObjectURL(image)
+                  : profile
+                  ? profile.image
+                  : ""
+              }
+              alt=""
+            />
             <div>
               <input
                 id="image"
@@ -62,7 +117,13 @@ const Profile = () => {
             name="name"
             autoComplete="name"
             autoFocus
-            value={name}
+            value={
+              name !== null && name !== undefined
+                ? name
+                : profile
+                ? profile.name
+                : ""
+            }
             onChange={(e) => setName(e.target.value)}
           />
           <Button
@@ -71,19 +132,9 @@ const Profile = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            保存
+            {profile ? "更新" : "作成"}
           </Button>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            onClick={() => {
-              doBackHome();
-            }}
-            sx={{ mt: 1.5, mb: 2 }}
-          >
-            戻る
-          </Button>
+          <HomeBtn />
         </Box>
       </Paper>
     </Container>

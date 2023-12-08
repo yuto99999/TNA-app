@@ -1,12 +1,10 @@
 import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-const ProfileBtn = () => {
+const ChatBtn = () => {
   const navigate = useNavigate();
-
-  // ログアウトの処理を追記
-  const doEditProfile = () => {
-    navigate("/Profile")
+  const doChat = () => {
+    navigate("/Chat");
   };
 
   return (
@@ -14,13 +12,13 @@ const ProfileBtn = () => {
       <Button
         variant="contained"
         onClick={() => {
-          doEditProfile();
+          doChat();
         }}
       >
-        プロフィール編集
+        Chat
       </Button>
     </Box>
   );
 };
 
-export default ProfileBtn;
+export default ChatBtn;
