@@ -2,29 +2,33 @@ import * as React from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Typography, TextField, Button } from "@mui/material";
+import { Box, Typography, TextField, Button, Alert } from "@mui/material";
+// import Button from "@mui/material-next/Button";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
   const navigate = useNavigate();
 
-  // ユーザーがログインボタンを押したときにdoLogin関数が実行される
   const doLogin = () => {
     const auth = getAuth();
 
-    // Firebaseで用意されているメールアドレスとパスワードでログインするための関数
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        // ログインができたかどうかをわかりやすくするためのアラート
-        alert("ログインOK!");
+        setSuccess(true);
+        setError(false)
         console.log(user);
-        navigate("/Home");
+        setTimeout(() => {
+          navigate("/Home");
+        }, 2000);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        console.log(err);
+        setError(true);
       });
   };
 
@@ -33,55 +37,101 @@ export default function Login() {
   };
 
   return (
-    <Box width={"100%"} textAlign={"center"} marginTop="10rem">
-      <Typography>ログイン</Typography>
-      <Box
-        component="form"
-        sx={{
-          "& > :not(style)": { m: 1, width: "25ch" },
-        }}
-        noValidate
-        autoComplete="off"
-      >
+    <Box width="100%" height="100vh" bgcolor="#F5F4EE">
+      <Box display="flex" flexDirection="column" alignItems="center" pt="7rem">
+        <Typography
+          fontSize="3.5rem"
+          fontFamily="游ゴシック"
+          fontWeight="bold"
+          color="#2864F0"
+          mb={6}
+        >
+          出退勤管理くん
+        </Typography>
         <TextField
-          id="outlined-basic"
+          required
+          id="email"
           label="メールアドレス"
-          variant="outlined"
+          autoComplete="email"
+          autoFocus
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
+          sx={{ width: "25%", m: 1.5 }}
         />
-      </Box>
-      <Box
-        component="form"
-        sx={{
-          "& > :not(style)": { m: 1, width: "25ch" },
-        }}
-        noValidate
-        autoComplete="off"
-      >
         <TextField
-          id="outlined-basic"
+          required
+          id="password"
           label="パスワード"
-          variant="outlined"
+          type="password"
+          value={password}
           onChange={(e) => setPassword(e.target.value)}
+          sx={{ width: "25%", m: 1 }}
         />
+        <Button
+          variant="contained"
+          onClick={() => {
+            doLogin();
+          }}
+          sx={{
+            width: "25%",
+            mt: 6,
+            mb: 2,
+            bgcolor: "#2864F0",
+            fontSize: "1.3rem",
+            fontFamily: "游ゴシック",
+            fontWeight: 600,
+            borderRadius: "5rem",
+          }}
+        >
+          ログイン
+        </Button>
+        <Button
+          variant="contained"
+          onClick={() => {
+            changeRegister();
+          }}
+          sx={{
+            width: "25%",
+            bgcolor: "#2864F0",
+            fontSize: "1.3rem",
+            fontFamily: "游ゴシック",
+            fontWeight: 600,
+            borderRadius: "5rem",
+          }}
+        >
+          新規登録はこちらから
+        </Button>
+        {success && (
+          <Alert
+            severity="success"
+            sx={{
+              width: "25%",
+              mt: 5,
+              fontSize: "1.2rem",
+              fontFamily: "游ゴシック",
+              fontWeight: 600,
+              alignItems: "center",
+            }}
+          >
+            ログインしました
+          </Alert>
+        )}
+        {error && (
+          <Alert
+            severity="error"
+            sx={{
+              width: "25%",
+              mt: 5,
+              fontSize: "1.2rem",
+              fontFamily: "游ゴシック",
+              fontWeight: 600,
+              alignItems: "center",
+            }}
+          >
+            ログインできませんでした
+          </Alert>
+        )}
       </Box>
-      <Button
-        sx={{ marginRight: "1rem" }}
-        variant="contained"
-        onClick={() => {
-          doLogin();
-        }}
-      >
-        ログイン
-      </Button>
-      <Button
-        variant="contained"
-        onClick={() => {
-          changeRegister();
-        }}
-      >
-        新規登録
-      </Button>
     </Box>
   );
 }

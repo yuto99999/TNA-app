@@ -1,5 +1,4 @@
 import HomeBtn from "../molecule/Btn/HomeBtn";
-// import NoWorker from "../molecule/Record/NoWorker";
 import OfficeWorker from "../molecule/Record/OfficeWorker";
 
 const Record = () => {
@@ -7,7 +6,6 @@ const Record = () => {
     <>
       <HomeBtn />
       <OfficeWorker />
-      {/* <NoWorker /> */}
     </>
   );
 };
