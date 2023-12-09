@@ -20,7 +20,7 @@ export default function Login() {
       .then((userCredential) => {
         const user = userCredential.user;
         setSuccess(true);
-        setError(false)
+        setError(false);
         console.log(user);
         setTimeout(() => {
           navigate("/Home");
