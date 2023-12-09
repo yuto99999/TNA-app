@@ -18,7 +18,6 @@ const InputMessage = () => {
     const firestore = firebaseApp.firestore;
     if (message === "") {
       setError(true);
-
       return;
     }
 
