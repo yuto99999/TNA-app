@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Box, Button, Modal, Typography } from "@mui/material";
+import AttendanceButton from "../Btn/AttendanceBtn";
 
 const style = {
   position: "absolute" as "absolute",
@@ -11,8 +12,8 @@ const style = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
-  textAlign :"center",
-  marginTop : "3rem",
+  textAlign: "center",
+  marginTop: "3rem",
 };
 
 export default function InModal() {
@@ -35,10 +36,7 @@ export default function InModal() {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             出社形態を選択してください。
           </Typography>
-          <Button sx={{ marginRight: "1rem" }} variant="contained">
-            出社
-          </Button>
-          <Button variant="contained">在宅</Button>
+          <AttendanceButton />
         </Box>
       </Modal>
     </Box>
