@@ -1,6 +1,6 @@
 import React from "react";
-import DateTime from "../organisms/DateTime";
-import Punch from "../organisms/Punch";
+import DateTime from "../organisms/Home/DateTime";
+import Punch from "../organisms/Home/Punch";
 import Header from "./Header";
 import { Box } from "@mui/material";
 

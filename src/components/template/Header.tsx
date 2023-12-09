@@ -4,6 +4,7 @@ import Logout from "../organisms/Authentication/Logout";
 import ProfileBtn from "../molecule/Btn/ProfileBtn";
 import ChatBtn from "../molecule/Btn/ChatBtn";
 import useProfile from "../molecule/Hooks/useProfile";
+import RecordBtn from "../molecule/Btn/RecordBtn";
 
 const Header = () => {
   const profileData = useProfile();
@@ -18,6 +19,7 @@ const Header = () => {
       <Logout />
       <ProfileBtn />
       <ChatBtn />
+      <RecordBtn />
     </Box>
   );
 };
