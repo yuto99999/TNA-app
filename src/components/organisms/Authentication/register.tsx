@@ -1,11 +1,13 @@
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Typography, TextField, Button } from "@mui/material";
+import { Box, Typography, TextField, Button ,Alert } from "@mui/material";
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
   const navigate = useNavigate();
 
@@ -15,12 +17,16 @@ export default function Register() {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        alert("登録完了！");
         console.log(user);
-        navigate("/Profile");
+        setSuccess(true);
+        setError(false);
+        setTimeout(() => {
+          navigate("/Profile");
+        }, 2000);
       })
       .catch((error) => {
         console.log(error);
+        setError(true);
       });
   };
 
@@ -73,6 +79,36 @@ export default function Register() {
         >
           登録
         </Button>
+        {success && (
+          <Alert
+            severity="success"
+            sx={{
+              width: "25%",
+              mt: 5,
+              fontSize: "1.2rem",
+              fontFamily: "游ゴシック",
+              fontWeight: 600,
+              alignItems: "center",
+            }}
+          >
+            登録しました
+          </Alert>
+        )}
+        {error && (
+          <Alert
+            severity="error"
+            sx={{
+              width: "25%",
+              mt: 5,
+              fontSize: "1.2rem",
+              fontFamily: "游ゴシック",
+              fontWeight: 600,
+              alignItems: "center",
+            }}
+          >
+            登録できませんでした
+          </Alert>
+        )}
       </Box>
     </Box>
   );
