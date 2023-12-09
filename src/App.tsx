@@ -6,6 +6,7 @@ import Login from "./components/organisms/Authentication/Login";
 import Top from "./components/template/Top";
 import Profile from "./components/organisms/Profile";
 import Chat from "./components/organisms/Chat";
+import Record from "./components/organisms/Record";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/Home" element={<Top />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/Chat" element={<Chat />} />
+        <Route path="/Record" element={<Record />} />
       </Routes>
     </Router>
   );
