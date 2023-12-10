@@ -8,16 +8,21 @@ const RecordBtn = () => {
   };
 
   return (
-    <Box>
-      <Button
-        variant="contained"
-        onClick={() => {
-          doRecord();
-        }}
-      >
-        管理画面
-      </Button>
-    </Box>
+    <Button
+      variant="text"
+      fullWidth
+      onClick={() => {
+        doRecord();
+      }}
+      sx={{
+        color: "#000000",
+        fontSize: "1.3rem",
+        fontFamily: "游ゴシック",
+        fontWeight: 600,
+      }}
+    >
+      出退勤管理
+    </Button>
   );
 };
 

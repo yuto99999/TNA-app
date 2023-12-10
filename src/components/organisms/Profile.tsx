@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-  Paper,
+  Alert,
   Typography,
   Box,
   TextField,
@@ -13,7 +13,6 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { collection, addDoc, doc, updateDoc } from "firebase/firestore";
 import useUser from "../molecule/Hooks/useUser";
 import useProfile from "../molecule/Hooks/useProfile";
-import HomeBtn from "../molecule/Btn/HomeBtn";
 
 const Profile = () => {
   const [name, setName] = useState("");
@@ -63,7 +62,7 @@ const Profile = () => {
         }
       }
       setSuccess(true);
-      alert("完了");
+      setError(false);
     } catch (err) {
       console.log(err);
       setError(true);
@@ -77,11 +76,24 @@ const Profile = () => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Paper sx={{ m: 4, p: 4 }}>
-        <Typography align="center">プロフィール編集</Typography>
+    <Box width="80%" pt={8} sx={{ float: "right" }}>
+      <Container sx={{ width: "48%" }}>
+        <Typography
+          textAlign="center"
+          fontSize="2rem"
+          fontFamily="游ゴシック"
+          fontWeight={600}
+        >
+          プロフィール編集
+        </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 4 }}>
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
             <Avatar
               src={
                 image
@@ -90,9 +102,10 @@ const Profile = () => {
                   ? profile.image
                   : ""
               }
-              alt=""
+              alt="アイコン"
+              sx={{ width: 90, height: 90 }}
             />
-            <div>
+            <Box>
               <input
                 id="image"
                 type="file"
@@ -101,43 +114,82 @@ const Profile = () => {
                 style={{ display: "none" }}
               />
               <label htmlFor="image">
-                <Button variant="contained" color="primary" component="span">
+                <Button
+                  variant="outlined"
+                  component="span"
+                  sx={{
+                    fontSize: "1.2rem",
+                    fontFamily: "游ゴシック",
+                    fontWeight: 600,
+                    borderRadius: "5rem",
+                    p: "0.5rem 3rem",
+                  }}
+                >
                   画像を選択
                 </Button>
               </label>
-            </div>
+            </Box>
           </Box>
-
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="name"
-            label="ユーザー名"
-            name="name"
-            autoComplete="name"
-            autoFocus
-            value={
-              name !== null && name !== undefined
-                ? name
-                : profile
-                ? profile.name
-                : ""
-            }
-            onChange={(e) => setName(e.target.value)}
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            {profile ? "更新" : "作成"}
-          </Button>
-          <HomeBtn />
+          <Box textAlign="center">
+            <TextField
+              required
+              fullWidth
+              id="name"
+              label="ユーザー名"
+              name="name"
+              autoComplete="name"
+              autoFocus
+              onChange={(e) => setName(e.target.value)}
+              sx={{ mt: 5, mb: 5 }}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              fullWidth
+              sx={{
+                bgcolor: "#2864F0",
+                fontSize: "1.2rem",
+                fontFamily: "游ゴシック",
+                fontWeight: 600,
+                borderRadius: "5rem",
+                mt: 2,
+                p: "0.5rem 0",
+              }}
+            >
+              {profile ? "更新" : "作成"}
+            </Button>
+            {success && (
+              <Alert
+                severity="success"
+                sx={{
+                  mt: 5,
+                  fontSize: "1.2rem",
+                  fontFamily: "游ゴシック",
+                  fontWeight: 600,
+                  alignItems: "center",
+                }}
+              >
+                プロフィールの{profile ? "更新" : "作成"}が完了しました
+              </Alert>
+            )}
+            {error && (
+              <Alert
+                severity="error"
+                sx={{
+                  mt: 5,
+                  fontSize: "1.2rem",
+                  fontFamily: "游ゴシック",
+                  fontWeight: 600,
+                  alignItems: "center",
+                }}
+              >
+                プロフィールの{profile ? "更新" : "作成"}ができませんでした
+              </Alert>
+            )}
+          </Box>
         </Box>
-      </Paper>
-    </Container>
+      </Container>
+    </Box>
   );
 };
 
