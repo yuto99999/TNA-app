@@ -25,9 +25,13 @@ const DateTime = () => {
   }, []);
 
   return (
-    <Box textAlign="center" marginTop="7rem">
-      <Typography>{date}</Typography>
-      <Typography>{time}</Typography>
+    <Box textAlign="center" pt={10}>
+      <Typography fontSize="2rem" fontFamily="游ゴシック" fontWeight={600}>
+        {date}
+      </Typography>
+      <Typography fontSize="6.5rem" fontFamily="游ゴシック" fontWeight={600} letterSpacing={5}>
+        {time}
+      </Typography>
     </Box>
   );
 };

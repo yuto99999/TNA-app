@@ -48,7 +48,14 @@ const Chat = () => {
   });
 
   return (
-    <Box sx={{ flexGrow: 1, m: 2, pb: 4 }}>
+    <Box
+      sx={{
+        flexGrow: 1,
+        pb: 4,
+        width: "80%",
+        float: "right",
+      }}
+    >
       {messages ? (
         messages.map((message: Message) => (
           <Box

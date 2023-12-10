@@ -8,16 +8,21 @@ const ChatBtn = () => {
   };
 
   return (
-    <Box>
-      <Button
-        variant="contained"
-        onClick={() => {
-          doChat();
-        }}
-      >
-        Chat
-      </Button>
-    </Box>
+    <Button
+      variant="text"
+      fullWidth
+      onClick={() => {
+        doChat();
+      }}
+      sx={{
+        color: "#000000",
+        fontSize: "1.3rem",
+        fontFamily: "游ゴシック",
+        fontWeight: 600,
+      }}
+    >
+      Chat
+    </Button>
   );
 };
 

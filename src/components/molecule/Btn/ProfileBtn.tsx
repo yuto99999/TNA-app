@@ -8,16 +8,21 @@ const ProfileBtn = () => {
   };
 
   return (
-    <Box>
-      <Button
-        variant="contained"
-        onClick={() => {
-          doEditProfile();
-        }}
-      >
-        プロフィール編集
-      </Button>
-    </Box>
+    <Button
+      variant="text"
+      fullWidth
+      onClick={() => {
+        doEditProfile();
+      }}
+      sx={{
+        color: "#000000",
+        fontSize: "1.3rem",
+        fontFamily: "游ゴシック",
+        fontWeight: 600,
+      }}
+    >
+      プロフィール編集
+    </Button>
   );
 };
 

@@ -44,7 +44,8 @@ const InputMessage = () => {
       sx={{
         position: "fixed",
         bottom: 0,
-        width: "100%",
+        width: "80%",
+        float:"right"
       }}
     >
       {error && <Alert severity="error">送信できませんでした</Alert>}
@@ -59,7 +60,6 @@ const InputMessage = () => {
         <Button variant="contained" onClick={() => handleClick()}>
           送信
         </Button>
-        <HomeBtn />
       </Stack>
     </Box>
   );

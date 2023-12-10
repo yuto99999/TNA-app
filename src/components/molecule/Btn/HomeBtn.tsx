@@ -9,9 +9,16 @@ const HomeBtn = () => {
 
   return (
     <Button
-      variant="contained"
+      variant="text"
+      fullWidth
       onClick={() => {
         doBackHome();
+      }}
+      sx={{
+        color: "#000000",
+        fontSize: "1.3rem",
+        fontFamily: "游ゴシック",
+        fontWeight: 600,
       }}
     >
       Home

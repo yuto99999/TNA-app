@@ -43,11 +43,30 @@ const AttendanceButton = () => {
       <Button
         variant="contained"
         onClick={() => handleAttendance("office")}
-        sx={{ mr: 2 }}
+        sx={{
+          mr: 5,
+          bgcolor: "#2864F0",
+          fontSize: "1.3rem",
+          fontFamily: "游ゴシック",
+          fontWeight: 600,
+          borderRadius: "5rem",
+          p: ".3rem 3rem",
+        }}
       >
         出社
       </Button>
-      <Button variant="contained" onClick={() => handleAttendance("remote")}>
+      <Button
+        variant="contained"
+        onClick={() => handleAttendance("remote")}
+        sx={{
+          bgcolor: "#2864F0",
+          fontSize: "1.3rem",
+          fontFamily: "游ゴシック",
+          fontWeight: 600,
+          borderRadius: "5rem",
+          p: ".3rem 3rem",
+        }}
+      >
         在宅
       </Button>
     </Box>

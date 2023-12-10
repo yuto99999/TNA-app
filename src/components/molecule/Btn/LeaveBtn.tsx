@@ -37,7 +37,18 @@ const LeaveButton = () => {
   };
 
   return (
-    <Button variant="contained" onClick={() => handleAttendance("leave")}>
+    <Button
+      variant="contained"
+      onClick={() => handleAttendance("leave")}
+      sx={{
+        bgcolor: "#2864F0",
+        fontSize: "1.7rem",
+        fontFamily: "游ゴシック",
+        fontWeight: 600,
+        borderRadius: "5rem",
+        p: "0.5rem 7rem",
+      }}
+    >
       退勤
     </Button>
   );

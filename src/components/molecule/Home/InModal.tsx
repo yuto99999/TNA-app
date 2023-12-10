@@ -6,10 +6,10 @@ const style = {
   position: "absolute" as "absolute",
   top: "50%",
   left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
+  transform: "translate(-50%, -80%)",
+  width: "30%",
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  border: "1px solid #000",
   boxShadow: 24,
   p: 4,
   textAlign: "center",
@@ -23,7 +23,18 @@ export default function InModal() {
 
   return (
     <Box marginRight="3rem">
-      <Button onClick={handleOpen} variant="contained">
+      <Button
+        onClick={handleOpen}
+        variant="contained"
+        sx={{
+          bgcolor: "#2864F0",
+          fontSize: "1.7rem",
+          fontFamily: "游ゴシック",
+          fontWeight: 600,
+          borderRadius: "5rem",
+          p: "0.5rem 7rem",
+        }}
+      >
         出勤
       </Button>
       <Modal
@@ -33,8 +44,8 @@ export default function InModal() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            出社形態を選択してください。
+          <Typography id="modal-modal-title" p={2} fontSize="1.5rem" fontFamily="游ゴシック" fontWeight={600}>
+            出社形態を選択してください
           </Typography>
           <AttendanceButton />
         </Box>

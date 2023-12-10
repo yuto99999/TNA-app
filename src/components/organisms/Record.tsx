@@ -4,7 +4,6 @@ import OfficeWorker from "../molecule/Record/OfficeWorker";
 const Record = () => {
   return (
     <>
-      <HomeBtn />
       <OfficeWorker />
     </>
   );
