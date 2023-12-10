@@ -12,7 +12,6 @@ import Top from "./components/template/Top";
 import Profile from "./components/organisms/Profile";
 import Chat from "./components/organisms/Chat";
 import Record from "./components/organisms/Record";
-import { Box, ThemeProvider } from "@mui/material";
 import Sidebar from "./components/template/Sidebar";
 
 function Layout() {
