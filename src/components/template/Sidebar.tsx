@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Avatar, Typography, Grid } from "@mui/material";
-import Logout from "../organisms/Authentication/Logout";
+import Logout from "../organisms/Auth/Logout";
 import ProfileBtn from "../molecule/Btn/ProfileBtn";
 import ChatBtn from "../molecule/Btn/ChatBtn";
 import useProfile from "../molecule/Hooks/useProfile";
@@ -19,15 +19,22 @@ const Sidebar = () => {
       display="flex"
       flexDirection="column"
       alignItems="center"
+      position="sticky"
       sx={{ float: "left" }}
     >
-      <Box mt={4} textAlign="center">
+      <Box mt={4} display="flex" flexDirection="column" alignItems="center">
         <Avatar
           src={profile ? profile.image : ""}
           alt="アイコン"
-          sx={{ width: 75, height: 75 }}
+          sx={{ width: 80, height: 80 }}
         />
-        <Typography pt={1} pb={1} fontSize="1.5rem" fontFamily="游ゴシック" fontWeight={600}>
+        <Typography
+          pt={1.5}
+          pb={2}
+          fontSize="1.5rem"
+          fontFamily="游ゴシック"
+          fontWeight={600}
+        >
           {profile ? profile.name : ""}
         </Typography>
       </Box>
