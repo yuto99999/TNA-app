@@ -6,13 +6,13 @@ import {
   Route,
   Outlet,
 } from "react-router-dom";
-import Register from "./components/organisms/Authentication/register";
-import Login from "./components/organisms/Authentication/Login";
-import Top from "./components/template/Top";
+import Register from "./components/organisms/Auth/register";
+import Login from "./components/organisms/Auth/Login";
 import Profile from "./components/organisms/Profile";
-import Chat from "./components/organisms/Chat";
 import Record from "./components/organisms/Record";
 import Sidebar from "./components/template/Sidebar";
+import Chat from "./components/organisms/Chat";
+import Home from "./components/template/Home";
 
 function Layout() {
   return (
@@ -28,7 +28,7 @@ function App() {
     <Router>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/Home" element={<Top />} />
+          <Route path="/Home" element={<Home />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path="/Chat" element={<Chat />} />
           <Route path="/Record" element={<Record />} />
