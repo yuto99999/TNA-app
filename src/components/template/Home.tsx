@@ -1,10 +1,9 @@
 import React from "react";
 import DateTime from "../organisms/Home/DateTime";
 import Punch from "../organisms/Home/Punch";
-import Header from "./Sidebar";
 import { Box } from "@mui/material";
 
-const Top = () => {
+const Home = () => {
   return (
     <Box >
       <DateTime />
@@ -13,4 +12,4 @@ const Top = () => {
   );
 };
 
-export default Top;
+export default Home;

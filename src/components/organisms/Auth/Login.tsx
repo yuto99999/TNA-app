@@ -46,7 +46,7 @@ export default function Login() {
           color="#2864F0"
           mb={6}
         >
-          出退勤管理くん
+          出退勤管理 TNA-APP
         </Typography>
         <TextField
           required
@@ -111,6 +111,7 @@ export default function Login() {
               fontFamily: "游ゴシック",
               fontWeight: 600,
               alignItems: "center",
+              borderRadius: 3,
             }}
           >
             ログインしました
@@ -126,6 +127,7 @@ export default function Login() {
               fontFamily: "游ゴシック",
               fontWeight: 600,
               alignItems: "center",
+              borderRadius: 3,
             }}
           >
             ログインできませんでした

@@ -5,7 +5,6 @@ import useProfile from "../Hooks/useProfile";
 import { Box, Button } from "@mui/material";
 
 const AttendanceButton = () => {
-  const [type, setType] = useState("leave");
   const [error, setError] = useState(false);
   const firestore = firebaseApp.firestore;
 
@@ -30,7 +29,6 @@ const AttendanceButton = () => {
           image,
         },
       });
-
       alert("出勤しました！");
     } catch (err) {
       console.log(err);
@@ -42,7 +40,7 @@ const AttendanceButton = () => {
     <Box>
       <Button
         variant="contained"
-        onClick={() => handleAttendance("office")}
+        onClick={() => handleAttendance("出社")}
         sx={{
           mr: 5,
           bgcolor: "#2864F0",
@@ -57,7 +55,7 @@ const AttendanceButton = () => {
       </Button>
       <Button
         variant="contained"
-        onClick={() => handleAttendance("remote")}
+        onClick={() => handleAttendance("在宅")}
         sx={{
           bgcolor: "#2864F0",
           fontSize: "1.3rem",

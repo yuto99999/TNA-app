@@ -167,6 +167,7 @@ const Profile = () => {
                   fontFamily: "游ゴシック",
                   fontWeight: 600,
                   alignItems: "center",
+                  borderRadius: 3,
                 }}
               >
                 プロフィールの{profile ? "更新" : "作成"}が完了しました
@@ -181,6 +182,7 @@ const Profile = () => {
                   fontFamily: "游ゴシック",
                   fontWeight: 600,
                   alignItems: "center",
+                  borderRadius: 3,
                 }}
               >
                 プロフィールの{profile ? "更新" : "作成"}ができませんでした

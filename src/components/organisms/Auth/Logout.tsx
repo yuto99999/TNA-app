@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { collection, addDoc, Timestamp } from "firebase/firestore";
-import { firebaseApp } from "../../..";
-import useProfile from "../Hooks/useProfile";
-import { Box, Button, Typography, Alert, Modal } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { getAuth, signOut } from "firebase/auth";
+import { Box, Button, Modal, Typography, Alert } from "@mui/material";
 
 const style = {
   position: "absolute" as "absolute",
@@ -18,60 +17,46 @@ const style = {
   marginTop: "3rem",
 };
 
-export default function OutModal() {
-  const [open, setOpen] = useState(false);
-  const [error, setError] = useState(false);
-  const [success, setSuccess] = useState(false);
-
+const Logout = () => {
+  const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const firestore = firebaseApp.firestore;
+  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-  const profileData = useProfile();
-  const profile = profileData.profile;
+  const navigate = useNavigate();
 
-  const handleAttendance = async (type: string) => {
-    setError(false);
-
-    try {
-      const uid = profile?.uid;
-      const name = profile?.name;
-      const image = profile?.image;
-      const docRef = collection(firestore, "Records");
-
-      await addDoc(docRef, {
-        type,
-        createdAt: Timestamp.fromDate(new Date()),
-        user: {
-          uid,
-          name,
-          image,
-        },
+  const doLogout = () => {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        setSuccess(true);
+        setError(false);
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(true);
       });
-      setSuccess(true);
-      setError(false);
-    } catch (err) {
-      console.log(err);
-      setError(true);
-    }
   };
 
   return (
-    <Box marginRight="3rem">
+    <>
       <Button
         onClick={handleOpen}
-        variant="contained"
+        variant="text"
+        fullWidth
         sx={{
-          bgcolor: "#2864F0",
-          fontSize: "1.7rem",
+          color: "#000000",
+          fontSize: "1.3rem",
           fontFamily: "游ゴシック",
           fontWeight: 600,
-          borderRadius: "5rem",
-          p: "0.5rem 7rem",
         }}
       >
-        退勤
+        ログアウト
       </Button>
       <Modal
         open={open}
@@ -87,11 +72,13 @@ export default function OutModal() {
             fontFamily="游ゴシック"
             fontWeight={600}
           >
-            退勤しますか？
+            ログアウトしますか？
           </Typography>
           <Button
             variant="contained"
-            onClick={() => handleAttendance("退勤")}
+            onClick={() => {
+              doLogout();
+            }}
             sx={{
               mr: 5,
               bgcolor: "#2864F0",
@@ -130,11 +117,13 @@ export default function OutModal() {
                 borderRadius: 3,
               }}
             >
-              お疲れ様でした！
+              ログアウトしました
             </Alert>
           )}
         </Box>
       </Modal>
-    </Box>
+    </>
   );
-}
+};
+
+export default Logout;

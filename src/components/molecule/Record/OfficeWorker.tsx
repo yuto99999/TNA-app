@@ -41,19 +41,37 @@ const OfficeWorker = () => {
   }, []);
 
   return (
-    <Box>
+    <Box p={3}>
       {officeRecord.map((Records: Record, index) => (
-        <Box key={index}>
-          <Typography>Type: {Records.type}</Typography>
-          <Typography>
-            Timestamp: {Records.createdAt.toDate().toLocaleString()}
+        <Box
+          key={index}
+          width="45%"
+          display="flex"
+          alignItems="center"
+          bgcolor="#F5F4EE"
+          m={2}
+          mb={3}
+          p={2}
+          borderRadius={5}
+        >
+          <Avatar src={Records.user.image} sx={{ mr: 2 }} />
+          <Typography sx={{ ...styledFont, mr: 2 }}>
+            {Records.user.name}
           </Typography>
-          <Typography>User Name: {Records.user.name}</Typography>
-          <Avatar src={Records.user.image} />
+          <Typography sx={{ ...styledFont, mr: 2 }}>{Records.type}</Typography>
+          <Typography sx={{ ...styledFont, mr: 2 }}>
+            {Records.createdAt.toDate().toLocaleString()}
+          </Typography>
         </Box>
       ))}
     </Box>
   );
+};
+
+const styledFont = {
+  fontSize: "1.2rem",
+  fontFamily: "游ゴシック",
+  fontWeight: 600,
 };
 
 export default OfficeWorker;
