@@ -6,7 +6,7 @@ import { firebaseApp } from "../../..";
 import useProfile from "../../molecule/Hooks/useProfile";
 
 const InputNote = () => {
-  const [message, setMessage] = useState("");
+  const [note, setNote] = useState("");
   const [error, setError] = useState(false);
 
   const profileData = useProfile();
@@ -15,23 +15,18 @@ const InputNote = () => {
   const handleClick = async () => {
     setError(false);
     const firestore = firebaseApp.firestore;
-    if (message === "") {
+    if (note === "") {
       setError(true);
       return;
     }
 
     try {
-      const docRef = collection(firestore, "Messages");
+      const docRef = collection(firestore, "Notes");
       await addDoc(docRef, {
-        text: message,
+        text: note,
         createdAt: Timestamp.fromDate(new Date()),
-        user: {
-          name: profile?.name,
-          image: profile?.image,
-          uid: profile?.uid,
-        },
       });
-      setMessage("");
+      setNote("");
     } catch (err) {
       console.log(err);
       setError(true);
@@ -43,7 +38,7 @@ const InputNote = () => {
       sx={{
         position: "fixed",
         bottom: 0,
-        width: "80%",
+        width: "38%",
         float: "right",
       }}
     >
@@ -51,8 +46,8 @@ const InputNote = () => {
       <Stack direction="row" spacing={2} sx={{ margin: "0.9rem" }}>
         <TextField
           size="medium"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          value={note}
+          onChange={(e) => setNote(e.target.value)}
           sx={{ flex: 1 }}
         />
         <Button
@@ -60,13 +55,13 @@ const InputNote = () => {
           onClick={() => handleClick()}
           sx={{
             borderRadius: "0.3rem",
-            p: "0.5rem 1.8rem",
+            p: "0.5rem 1.2rem",
             fontSize: "1.1rem",
             fontFamily: "游ゴシック",
             fontweight: 600,
           }}
         >
-          送信
+          メモ
         </Button>
       </Stack>
     </Box>

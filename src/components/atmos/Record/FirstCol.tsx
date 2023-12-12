@@ -16,7 +16,7 @@ const FirstCol = () => {
 
 const styledBox = {
   width: "15rem",
-  height: "5rem",
+  height: "8rem",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
