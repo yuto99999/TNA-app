@@ -23,7 +23,7 @@ const RecordLogin = () => {
         console.log(user);
         setTimeout(() => {
           navigate("/Menu");
-        }, 2000);
+        }, 1000);
       })
       .catch((err) => {
         console.log(err);
