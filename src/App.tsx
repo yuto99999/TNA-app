@@ -13,6 +13,8 @@ import Record from "./components/organisms/Record";
 import Sidebar from "./components/template/Sidebar";
 import Chat from "./components/organisms/Chat";
 import Home from "./components/template/Home";
+import RecordLogin from "./components/molecule/Record/RecordLogin";
+import Menu from "./components/molecule/Record/Menu";
 
 function Layout() {
   return (
@@ -32,6 +34,8 @@ function App() {
           <Route path="/Profile" element={<Profile />} />
           <Route path="/Chat" element={<Chat />} />
           <Route path="/Record" element={<Record />} />
+          <Route path="/RecordLogin" element={<RecordLogin />} />
+          <Route path="/Menu" element={<Menu />} />
         </Route>
         <Route path="/" element={<Login />} />
         <Route path="/Register" element={<Register />} />
