@@ -6,10 +6,10 @@ import {
   where,
   Timestamp,
 } from "firebase/firestore";
-import { firebaseApp } from "../../..";
+import { firebaseApp } from "../../../..";
 import { Avatar, Box, Typography } from "@mui/material";
-import useFirebase from "../Hooks/useFirebase";
-import useRecord from "../Hooks/useRecord";
+import useFirebase from "../../Hooks/useFirebase";
+import useRecord from "../../Hooks/useRecord";
 
 interface Record {
   createdAt: Timestamp;
@@ -22,8 +22,7 @@ interface Record {
 }
 
 const OfficeWorker = () => {
-  const { documents: officeRecord } = useFirebase("Records");
-  console.log(document)
+  const { documents: officeRecord } = useRecord("Records", "出社");
 
   const [records, setRecords] = useState<Array<any>>([]);
   const db = firebaseApp.firestore;
@@ -43,7 +42,7 @@ const OfficeWorker = () => {
 
   return (
     <Box p={3}>
-      {officeRecord.map((Records: Record , index) => (
+      {officeRecord.map((Records: Record, index) => (
         <Box
           key={index}
           width="45%"
