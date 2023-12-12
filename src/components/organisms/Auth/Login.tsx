@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Box, Typography, TextField, Button, Alert } from "@mui/material";
 // import Button from "@mui/material-next/Button";
 
-export default function Login() {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState(false);
@@ -137,3 +137,5 @@ export default function Login() {
     </Box>
   );
 }
+
+export default Login;
