@@ -29,7 +29,7 @@ const FinalCol = () => {
 
 const styledBox = {
   width: "15rem",
-  height: "5rem",
+  height: "8rem",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -45,7 +45,7 @@ const styledFont = {
 
 const styledBtn = {
   width: "15rem",
-  height: "5rem",
+  height: "8rem",
   borderRadius: "1.5rem",
   border: "solid 1px #000000",
 };
