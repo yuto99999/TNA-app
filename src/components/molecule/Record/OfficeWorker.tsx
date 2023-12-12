@@ -8,8 +8,8 @@ import {
 } from "firebase/firestore";
 import { firebaseApp } from "../../..";
 import { Avatar, Box, Typography } from "@mui/material";
-import useRecord from "../Hooks/useRecord";
 import useFirebase from "../Hooks/useFirebase";
+import useRecord from "../Hooks/useRecord";
 
 interface Record {
   createdAt: Timestamp;
@@ -23,14 +23,15 @@ interface Record {
 
 const OfficeWorker = () => {
   const { documents: officeRecord } = useFirebase("Records");
+  console.log(document)
 
   const [records, setRecords] = useState<Array<any>>([]);
-  const firestore = firebaseApp.firestore;
+  const db = firebaseApp.firestore;
 
   useEffect(() => {
     const fetchRecords = async () => {
-      const recordsRef = collection(firestore, "Records");
-      const q = query(recordsRef, where("type", "==", "office"));
+      const recordsRef = collection(firebaseApp.firestore, "Records");
+      const q = query(recordsRef, where("type", "==", "出社"));
 
       const querySnapshot = await getDocs(q);
       const fetchedRecords = querySnapshot.docs.map((doc) => doc.data());
@@ -42,7 +43,7 @@ const OfficeWorker = () => {
 
   return (
     <Box p={3}>
-      {officeRecord.map((Records: Record, index) => (
+      {officeRecord.map((Records: Record , index) => (
         <Box
           key={index}
           width="45%"
