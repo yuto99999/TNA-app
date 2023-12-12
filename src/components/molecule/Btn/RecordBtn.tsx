@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const RecordBtn = () => {
   const navigate = useNavigate();
   const doRecord = () => {
-    navigate("/Record");
+    navigate("/RecordLogin");
   };
 
   return (
