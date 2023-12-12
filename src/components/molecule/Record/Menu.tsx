@@ -1,8 +1,8 @@
 import { Box, Typography, Button, Popover } from "@mui/material";
-import FirstCol from "../../atmos/FirstCol";
-import SecondCol from "../../atmos/SecondCol";
-import ThirdCol from "../../atmos/ThirdCol";
-import FinalCol from "../../atmos/FinalCol";
+import FirstCol from "../../atmos/Record/FirstCol";
+import SecondCol from "../../atmos/Record/SecondCol";
+import ThirdCol from "../../atmos/Record/ThirdCol";
+import FinalCol from "../../atmos/Record/FinalCol";
 
 const Menu = () => {
   return (
