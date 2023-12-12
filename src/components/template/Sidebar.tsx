@@ -1,11 +1,11 @@
 import React from "react";
 import { Box, Avatar, Typography, Grid } from "@mui/material";
-import Logout from "../organisms/Auth/Logout";
 import ProfileBtn from "../molecule/Btn/ProfileBtn";
 import ChatBtn from "../molecule/Btn/ChatBtn";
 import useProfile from "../molecule/Hooks/useProfile";
 import RecordBtn from "../molecule/Btn/RecordBtn";
 import HomeBtn from "../molecule/Btn/HomeBtn";
+import Logout from "../organisms/Auth/Logout";
 
 const Sidebar = () => {
   const profileData = useProfile();

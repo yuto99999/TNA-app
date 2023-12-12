@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Typography, TextField, Button ,Alert } from "@mui/material";
 
-export default function Register() {
+const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState(false);
@@ -113,3 +113,5 @@ export default function Register() {
     </Box>
   );
 }
+
+export default Register;

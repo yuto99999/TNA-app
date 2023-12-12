@@ -3,9 +3,8 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Typography, TextField, Button, Alert } from "@mui/material";
-// import Button from "@mui/material-next/Button";
 
-const Login = () => {
+const RecordLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState(false);
@@ -23,7 +22,7 @@ const Login = () => {
         setError(false);
         console.log(user);
         setTimeout(() => {
-          navigate("/Home");
+          navigate("/Menu");
         }, 2000);
       })
       .catch((err) => {
@@ -32,12 +31,8 @@ const Login = () => {
       });
   };
 
-  const changeRegister = () => {
-    navigate("/Register");
-  };
-
   return (
-    <Box width="100%" height="100vh" bgcolor="#F5F4EE">
+    <Box width="80%" height="100vh" sx={{float:"right"}}>
       <Box display="flex" flexDirection="column" alignItems="center" pt="7rem">
         <Typography
           fontSize="3.5rem"
@@ -46,7 +41,7 @@ const Login = () => {
           color="#2864F0"
           mb={6}
         >
-          出退勤管理 TNA-APP
+          管理画面ログイン
         </Typography>
         <TextField
           required
@@ -85,22 +80,6 @@ const Login = () => {
         >
           ログイン
         </Button>
-        <Button
-          variant="contained"
-          onClick={() => {
-            changeRegister();
-          }}
-          sx={{
-            width: "25%",
-            bgcolor: "#2864F0",
-            fontSize: "1.3rem",
-            fontFamily: "游ゴシック",
-            fontWeight: 600,
-            borderRadius: "5rem",
-          }}
-        >
-          新規登録はこちらから
-        </Button>
         {success && (
           <Alert
             severity="success"
@@ -136,6 +115,6 @@ const Login = () => {
       </Box>
     </Box>
   );
-}
+};
 
-export default Login;
+export default RecordLogin;
