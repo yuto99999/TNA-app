@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   collection,
   getDocs,
@@ -8,7 +8,7 @@ import {
 } from "firebase/firestore";
 import { firebaseApp } from "../../../..";
 import { Avatar, Box, Typography } from "@mui/material";
-import useFirebase from "../../Hooks/useFirebase";
+import useRecord from "../../Hooks/useRecord";
 import Note from "../Note";
 
 interface Record {
@@ -22,8 +22,8 @@ interface Record {
 }
 
 const OfficeWorker = () => {
-  const { documents: officeRecord } = useFirebase("Records");
-  console.log(document);
+  const { documents: officeRecord } = useRecord("Records", "出社");
+  console.log(officeRecord);
 
   const [records, setRecords] = useState<Array<any>>([]);
 
@@ -42,7 +42,7 @@ const OfficeWorker = () => {
 
   return (
     <Box display="flex">
-      <Box p={3} width="50%" >
+      <Box p={3} width="50%">
         {officeRecord.map((Records: Record, index) => (
           <Box
             key={index}
