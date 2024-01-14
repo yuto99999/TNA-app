@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-import { collection, onSnapshot, query, orderBy ,where } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  query,
+  orderBy,
+  where,
+} from "firebase/firestore";
 import { firebaseApp } from "../../..";
 
 const useRecord = (data: string, type: string) => {
@@ -11,18 +17,17 @@ const useRecord = (data: string, type: string) => {
     const queryRef = query(
       docRef,
       where("type", "==", type),
-      orderBy("createdAt")
+      orderBy("createdAt", "desc")
     );
     const unsub = onSnapshot(queryRef, (snapshot) => {
       let results: any = [];
       snapshot.docs.forEach((doc) => {
         results.push({ ...doc.data(), id: doc.id });
       });
-      console.log(results);
       setDocuments(results);
     });
     return () => unsub();
-  }, [data , type]);
+  }, [data, type]);
 
   return { documents };
 };
