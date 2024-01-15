@@ -4,7 +4,6 @@ import { Alert, Box, Button, Stack, TextField } from "@mui/material";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { firebaseApp } from "../../..";
 import useProfile from "../Hooks/useProfile";
-import SendIcon from "@mui/icons-material/Send";
 
 const InputMessage = () => {
   const [message, setMessage] = useState("");
