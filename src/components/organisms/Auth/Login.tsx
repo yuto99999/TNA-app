@@ -2,14 +2,23 @@ import * as React from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Typography, TextField, Button, Alert } from "@mui/material";
-// import Button from "@mui/material-next/Button";
+import { Box, Typography, TextField, Button } from "@mui/material";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -22,6 +31,7 @@ const Login = () => {
         setSuccess(true);
         setError(false);
         console.log(user);
+        setOpen(true);
         setTimeout(() => {
           navigate("/Home");
         }, 2000);
@@ -29,11 +39,26 @@ const Login = () => {
       .catch((err) => {
         console.log(err);
         setError(true);
+        setOpen(true);
       });
   };
 
   const changeRegister = () => {
     navigate("/Register");
+  };
+
+  const vertical = "top";
+  const horizontal = "right";
+
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
   };
 
   return (
@@ -102,40 +127,35 @@ const Login = () => {
           新規登録はこちらから
         </Button>
         {success && (
-          <Alert
-            severity="success"
-            sx={{
-              width: "25%",
-              mt: 5,
-              fontSize: "1.2rem",
-              fontFamily: "游ゴシック",
-              fontWeight: 600,
-              alignItems: "center",
-              borderRadius: 3,
-            }}
+          <Snackbar
+            open={open}
+            autoHideDuration={6000}
+            anchorOrigin={{ vertical, horizontal }}
           >
-            ログインしました
-          </Alert>
+            <Alert severity="success" sx={{ width: "100%" }}>
+              ログインしました！
+            </Alert>
+          </Snackbar>
         )}
         {error && (
-          <Alert
-            severity="error"
-            sx={{
-              width: "25%",
-              mt: 5,
-              fontSize: "1.2rem",
-              fontFamily: "游ゴシック",
-              fontWeight: 600,
-              alignItems: "center",
-              borderRadius: 3,
-            }}
+          <Snackbar
+            open={open}
+            onClose={handleClose}
+            autoHideDuration={6000}
+            anchorOrigin={{ vertical, horizontal }}
           >
-            ログインできませんでした
-          </Alert>
+            <Alert
+              severity="error"
+              onClose={handleClose}
+              sx={{ width: "100%" }}
+            >
+              ログインに失敗しました
+            </Alert>
+          </Snackbar>
         )}
       </Box>
     </Box>
   );
-}
+};
 
 export default Login;
