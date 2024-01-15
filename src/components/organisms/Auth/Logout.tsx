@@ -1,7 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
-import { Box, Button, Modal, Typography, Alert } from "@mui/material";
+import { Box, Button, Modal, Typography } from "@mui/material";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const style = {
   position: "absolute" as "absolute",
@@ -24,6 +33,7 @@ const Logout = () => {
 
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [openT, setOpenT] = useState(false);
 
   const navigate = useNavigate();
 
@@ -33,6 +43,7 @@ const Logout = () => {
       .then(() => {
         setSuccess(true);
         setError(false);
+        setOpenT(true);
         setTimeout(() => {
           navigate("/");
         }, 2000);
@@ -40,7 +51,22 @@ const Logout = () => {
       .catch((error) => {
         console.log(error);
         setError(true);
+        setOpenT(true);
       });
+  };
+
+  const vertical = "top";
+  const horizontal = "right";
+
+  const handleCloseT = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
   };
 
   return (
@@ -106,19 +132,31 @@ const Logout = () => {
             いいえ
           </Button>
           {success && (
-            <Alert
-              severity="success"
-              sx={{
-                mt: 2,
-                fontSize: "1.2rem",
-                fontFamily: "游ゴシック",
-                fontWeight: 600,
-                alignItems: "center",
-                borderRadius: 3,
-              }}
+            <Snackbar
+              open={openT}
+              autoHideDuration={6000}
+              anchorOrigin={{ vertical, horizontal }}
             >
-              ログアウトしました
-            </Alert>
+              <Alert severity="success" sx={{ width: "100%" }}>
+                ログアウトしました！
+              </Alert>
+            </Snackbar>
+          )}
+          {error && (
+            <Snackbar
+              open={openT}
+              onClose={handleCloseT}
+              autoHideDuration={6000}
+              anchorOrigin={{ vertical, horizontal }}
+            >
+              <Alert
+                severity="error"
+                onClose={handleCloseT}
+                sx={{ width: "100%" }}
+              >
+                ログアウトに失敗しました
+              </Alert>
+            </Snackbar>
           )}
         </Box>
       </Modal>
