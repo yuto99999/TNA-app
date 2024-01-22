@@ -1,4 +1,3 @@
-import React from "react";
 import DateTime from "../organisms/Home/DateTime";
 import Punch from "../organisms/Home/Punch";
 import { Box } from "@mui/material";
@@ -9,7 +8,7 @@ const Home = () => {
     <Box sx={{ overflowY: "scroll", height: "100vh" }}>
       <DateTime />
       <Punch />
-      <DisplayAvater />
+      {/* <DisplayAvater /> */}
     </Box>
   );
 };
