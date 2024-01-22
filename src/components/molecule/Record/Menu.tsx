@@ -1,4 +1,4 @@
-import { Box, Typography, Button, Popover } from "@mui/material";
+import { Box } from "@mui/material";
 import FirstCol from "../../atmos/Record/FirstCol";
 import SecondCol from "../../atmos/Record/SecondCol";
 import ThirdCol from "../../atmos/Record/ThirdCol";
@@ -6,11 +6,7 @@ import FinalCol from "../../atmos/Record/FinalCol";
 
 const Menu = () => {
   return (
-    <Box
-      width="80%"
-      height="100vh"
-      sx={{ float: "right" }}
-    >
+    <Box width="80%" height="100vh" sx={{ float: "right" }}>
       <Box display="flex" justifyContent="space-evenly" mt={10}>
         <FirstCol />
       </Box>
