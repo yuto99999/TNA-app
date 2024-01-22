@@ -9,7 +9,7 @@ const SecondCol = () => {
   return (
     <>
       <Box sx={{ ...styledBox, bgcolor: "#F5F4EE" }}>
-        <Typography sx={{ ...styledFont }}>12月11日のデータ</Typography>
+        <Typography sx={{ ...styledFont }}>今日のデータ</Typography>
       </Box>
       <Button
         sx={{ ...styledBtn }}

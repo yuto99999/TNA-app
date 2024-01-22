@@ -9,7 +9,7 @@ const ThirdCol = () => {
   return (
     <>
       <Box sx={{ ...styledBox, bgcolor: "#F5F4EE" }}>
-        <Typography sx={{ ...styledFont }}>12月のデータ</Typography>
+        <Typography sx={{ ...styledFont }}>今月のデータ</Typography>
       </Box>
       <Button
         sx={{ ...styledBtn }}
